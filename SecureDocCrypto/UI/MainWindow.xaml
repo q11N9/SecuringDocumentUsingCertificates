@@ -1,0 +1,132 @@
+﻿<Window x:Class="SecureDocCrypto.UI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SecureDocCrypto"
+        mc:Ignorable="d"
+        Title="Phần mềm mã hóa và giải mã tài liệu sử dụng chứng thư số" Height="480" Width="800" 
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None" ResizeMode="CanResize">
+    <!-- WindowStyle="None" dùng để ẩn thanh tiêu đề mặc định của Windows -->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <!-- Tiêu đề ứng dụng tự chế (Hỗ trợ kéo thả cửa sổ bằng sự kiện MouseLeftButtonDown) -->
+        <Border Background="#2C3E50" Grid.Row="0" Padding="15,10" MouseLeftButtonDown="Header_MouseLeftButtonDown">
+            <Grid>
+                <TextBlock Text="HỆ THỐNG MÃ HÓA VÀ GIẢI MÃ TÀI LIỆU DÙNG CHỨNG THƯ SỐ" 
+                           Foreground="White" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+
+                <!-- Bộ 3 nút điều khiển góc phải -->
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <!-- Nút ẩn xuống Taskbar -->
+                    <Button x:Name="BtnMinimize" Content="—" Width="30" Height="25" Background="Transparent" Foreground="White" 
+                            BorderThickness="0" FontSize="12" FontWeight="Bold" Cursor="Hand" Click="BtnMinimize_Click" Margin="0,0,5,0"/>
+                    <!-- Nút phóng to / Thu nhỏ -->
+                    <Button x:Name="BtnMaximize" Content="🗖" Width="30" Height="25" Background="Transparent" Foreground="White" 
+                            BorderThickness="0" FontSize="12" Cursor="Hand" Click="BtnMaximize_Click" Margin="0,0,5,0"/>
+                    <!-- Nút Đóng ứng dụng -->
+                    <Button x:Name="BtnClose" Content="✕" Width="30" Height="25" Background="Transparent" Foreground="White" 
+                            BorderThickness="0" FontSize="14" FontWeight="Bold" Cursor="Hand" Click="BtnClose_Click"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Thanh Tab chức năng chính -->
+        <TabControl Grid.Row="1" Margin="10">
+
+            <!-- TAB 1: MÃ HÓA -->
+            <TabItem Header="Mã Hóa Tài Liệu" FontSize="14" Padding="10,5">
+                <Grid Margin="20">
+                    <StackPanel>
+                        <TextBlock Text="1. Chọn tài liệu cần mã hóa (Bất kỳ định dạng nào):" Margin="0,0,0,5" FontWeight="Bold"/>
+                        <Grid Margin="0,0,0,15">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="100"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox x:Name="TxtEncryptInput" Grid.Column="0" Padding="5" IsReadOnly="True" />
+                            <Button x:Name="BtnBrowseEncryptInput" Content="Chọn File" Grid.Column="1" Margin="5,0,0,0" Click="BtnBrowseEncryptInput_Click"/>
+                        </Grid>
+
+                        <TextBlock Text="2. Chọn Chứng thư số người nhận (Public Key - .cer, .crt):" Margin="0,0,0,5" FontWeight="Bold"/>
+                        <Grid Margin="0,0,0,25">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="100"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox x:Name="TxtPublicKeyPath" Grid.Column="0" Padding="5" IsReadOnly="True" />
+                            <Button x:Name="BtnBrowsePublicKey" Grid.Column="1" Content="Chọn Key" Margin="5,0,0,0" Click="BtnBrowsePublicKey_Click"/>
+                        </Grid>
+
+                        <Button x:Name="BtnExecuteEncrypt" Content="THỰC HIỆN MÃ HÓA" Background="#27AE60" Foreground="White" 
+                                FontWeight="Bold" Padding="15" FontSize="16" Click="BtnExecuteEncrypt_Click"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+
+            <!-- TAB 2: GIẢI MÃ -->
+            <TabItem Header="Giải Mã Tài Liệu" FontSize="14" Padding="10,5">
+                <Grid Margin="20">
+                    <StackPanel>
+                        <TextBlock Text="1. Chọn file đã mã hóa (.p7m):" Margin="0,0,0,5" FontWeight="Bold"/>
+                        <Grid Margin="0,0,0,15">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="100"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox x:Name="TxtDecryptInput" Grid.Column="0" Padding="5" IsReadOnly="True" />
+                            <Button x:Name="BtnBrowseDecryptInput" Content="Chọn File" Grid.Column="1" Margin="5,0,0,0" Click="BtnBrowseDecryptInput_Click"/>
+                        </Grid>
+
+                        <TextBlock Text="2. Chọn Chứng thư số cá nhân của bạn (Private Key - .pfx, .p12):" Margin="0,0,0,5" FontWeight="Bold"/>
+                        <Grid Margin="0,0,0,15">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="100"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox x:Name="TxtPrivateKeyPath" Grid.Column="0" Padding="5" IsReadOnly="True" />
+                            <Button x:Name="BtnBrowsePrivateKey" Grid.Column="1" Content="Chọn Key" Margin="5,0,0,0" Click="BtnBrowsePrivateKey_Click"/>
+                        </Grid>
+
+                        <TextBlock Text="3. Nhập mật khẩu bảo vệ chứng thư (Passphrase):" Margin="0,0,0,5" FontWeight="Bold"/>
+                        <PasswordBox x:Name="TxtPrivateKeyPassword" Padding="5" Margin="0,0,0,25"/>
+
+                        <Button x:Name="BtnExecuteDecrypt" Content="THỰC HIỆN GIẢI MÃ" Background="#E67E22" Foreground="White" 
+                                FontWeight="Bold" Padding="15" FontSize="16" Click="BtnExecuteDecrypt_Click"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+
+            <!-- TAB 3: KHO CHỨNG THƯ HỆ THỐNG -->
+            <TabItem Header="Kho Chứng Thư Hệ Thống" FontSize="14" Padding="10,5">
+                <Grid Margin="15">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <DataGrid x:Name="GridWindowsCerts" Grid.Row="0" AutoGenerateColumns="False" IsReadOnly="True" Margin="0,0,0,10">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Tên Chủ Thể (Subject)" Binding="{Binding Subject}" Width="2*"/>
+                            <DataGridTextColumn Header="Nhà Phát Hành (Issuer)" Binding="{Binding Issuer}" Width="2*"/>
+                            <DataGridTextColumn Header="Ngày Hết Hạn" Binding="{Binding NotAfter, StringFormat=\{0:dd/MM/yyyy\}}" Width="1*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button x:Name="BtnRefreshStore" Content="Quét và Tải Chứng Thư Từ Windows Store" Grid.Row="1" Padding="10" Click="BtnRefreshStore_Click"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+        <!-- Thanh trạng thái (Status Bar / Log) -->
+        <StatusBar Grid.Row="2" Background="#BDC3C7">
+            <StatusBarItem>
+                <TextBlock x:Name="TxtStatus" Text="Trạng thái: Sẵn sàng." FontWeight="Bold" Foreground="#2C3E50"/>
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</Window>
