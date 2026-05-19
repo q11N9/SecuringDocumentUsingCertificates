@@ -5,34 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SecureDocCrypto"
         mc:Ignorable="d"
-        Title="Phần mềm mã hóa và giải mã tài liệu sử dụng chứng thư số" Height="480" Width="800" 
-        WindowStartupLocation="CenterScreen"
+        Title="Phần mềm mã hóa, giải mã và ký số tài liệu dùng chứng thư X.509" Height="650" Width="850" WindowStartupLocation="CenterScreen"
         WindowStyle="None" ResizeMode="CanResize">
-    <!-- WindowStyle="None" dùng để ẩn thanh tiêu đề mặc định của Windows -->
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
 
-        <!-- Tiêu đề ứng dụng tự chế (Hỗ trợ kéo thả cửa sổ bằng sự kiện MouseLeftButtonDown) -->
+        <!-- Tiêu đề ứng dụng tự chế -->
         <Border Background="#2C3E50" Grid.Row="0" Padding="15,10" MouseLeftButtonDown="Header_MouseLeftButtonDown">
             <Grid>
-                <TextBlock Text="HỆ THỐNG MÃ HÓA VÀ GIẢI MÃ TÀI LIỆU DÙNG CHỨNG THƯ SỐ" 
-                           Foreground="White" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-
-                <!-- Bộ 3 nút điều khiển góc phải -->
+                <TextBlock Text="HỆ THỐNG MẬT MÃ DÙNG CHỨNG THƯ SỐ: MÃ HÓA &amp; CHỮ KÝ SỐ" 
+                           Foreground="White" FontSize="15" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
-                    <!-- Nút ẩn xuống Taskbar -->
-                    <Button x:Name="BtnMinimize" Content="—" Width="30" Height="25" Background="Transparent" Foreground="White" 
-                            BorderThickness="0" FontSize="12" FontWeight="Bold" Cursor="Hand" Click="BtnMinimize_Click" Margin="0,0,5,0"/>
-                    <!-- Nút phóng to / Thu nhỏ -->
-                    <Button x:Name="BtnMaximize" Content="🗖" Width="30" Height="25" Background="Transparent" Foreground="White" 
-                            BorderThickness="0" FontSize="12" Cursor="Hand" Click="BtnMaximize_Click" Margin="0,0,5,0"/>
-                    <!-- Nút Đóng ứng dụng -->
-                    <Button x:Name="BtnClose" Content="✕" Width="30" Height="25" Background="Transparent" Foreground="White" 
-                            BorderThickness="0" FontSize="14" FontWeight="Bold" Cursor="Hand" Click="BtnClose_Click"/>
+                    <Button x:Name="BtnMinimize" Content="—" Width="30" Height="25" Background="Transparent" Foreground="White" BorderThickness="0" FontSize="12" FontWeight="Bold" Cursor="Hand" Click="BtnMinimize_Click" Margin="0,0,5,0"/>
+                    <Button x:Name="BtnMaximize" Content="🗖" Width="30" Height="25" Background="Transparent" Foreground="White" BorderThickness="0" FontSize="12" Cursor="Hand" Click="BtnMaximize_Click" Margin="0,0,5,0"/>
+                    <Button x:Name="BtnClose" Content="✕" Width="30" Height="25" Background="Transparent" Foreground="White" BorderThickness="0" FontSize="14" FontWeight="Bold" Cursor="Hand" Click="BtnClose_Click"/>
                 </StackPanel>
             </Grid>
         </Border>
@@ -41,7 +31,7 @@
         <TabControl Grid.Row="1" Margin="10">
 
             <!-- TAB 1: MÃ HÓA -->
-            <TabItem Header="Mã Hóa Tài Liệu" FontSize="14" Padding="10,5">
+            <TabItem Header="Mã Hóa" FontSize="13" Padding="12,6">
                 <Grid Margin="20">
                     <StackPanel>
                         <TextBlock Text="1. Chọn tài liệu cần mã hóa (Bất kỳ định dạng nào):" Margin="0,0,0,5" FontWeight="Bold"/>
@@ -53,7 +43,6 @@
                             <TextBox x:Name="TxtEncryptInput" Grid.Column="0" Padding="5" IsReadOnly="True" />
                             <Button x:Name="BtnBrowseEncryptInput" Content="Chọn File" Grid.Column="1" Margin="5,0,0,0" Click="BtnBrowseEncryptInput_Click"/>
                         </Grid>
-
                         <TextBlock Text="2. Chọn Chứng thư số người nhận (Public Key - .cer, .crt):" Margin="0,0,0,5" FontWeight="Bold"/>
                         <Grid Margin="0,0,0,25">
                             <Grid.ColumnDefinitions>
@@ -63,15 +52,13 @@
                             <TextBox x:Name="TxtPublicKeyPath" Grid.Column="0" Padding="5" IsReadOnly="True" />
                             <Button x:Name="BtnBrowsePublicKey" Grid.Column="1" Content="Chọn Key" Margin="5,0,0,0" Click="BtnBrowsePublicKey_Click"/>
                         </Grid>
-
-                        <Button x:Name="BtnExecuteEncrypt" Content="THỰC HIỆN MÃ HÓA" Background="#27AE60" Foreground="White" 
-                                FontWeight="Bold" Padding="15" FontSize="16" Click="BtnExecuteEncrypt_Click"/>
+                        <Button x:Name="BtnExecuteEncrypt" Content="THỰC HIỆN MÃ HÓA TÀI LIỆU" Background="#27AE60" Foreground="White" FontWeight="Bold" Padding="12" FontSize="14" Click="BtnExecuteEncrypt_Click"/>
                     </StackPanel>
                 </Grid>
             </TabItem>
 
             <!-- TAB 2: GIẢI MÃ -->
-            <TabItem Header="Giải Mã Tài Liệu" FontSize="14" Padding="10,5">
+            <TabItem Header="Giải Mã" FontSize="13" Padding="12,6">
                 <Grid Margin="20">
                     <StackPanel>
                         <TextBlock Text="1. Chọn file đã mã hóa (.p7m):" Margin="0,0,0,5" FontWeight="Bold"/>
@@ -83,7 +70,6 @@
                             <TextBox x:Name="TxtDecryptInput" Grid.Column="0" Padding="5" IsReadOnly="True" />
                             <Button x:Name="BtnBrowseDecryptInput" Content="Chọn File" Grid.Column="1" Margin="5,0,0,0" Click="BtnBrowseDecryptInput_Click"/>
                         </Grid>
-
                         <TextBlock Text="2. Chọn Chứng thư số cá nhân của bạn (Private Key - .pfx, .p12):" Margin="0,0,0,5" FontWeight="Bold"/>
                         <Grid Margin="0,0,0,15">
                             <Grid.ColumnDefinitions>
@@ -93,18 +79,163 @@
                             <TextBox x:Name="TxtPrivateKeyPath" Grid.Column="0" Padding="5" IsReadOnly="True" />
                             <Button x:Name="BtnBrowsePrivateKey" Grid.Column="1" Content="Chọn Key" Margin="5,0,0,0" Click="BtnBrowsePrivateKey_Click"/>
                         </Grid>
-
                         <TextBlock Text="3. Nhập mật khẩu bảo vệ chứng thư (Passphrase):" Margin="0,0,0,5" FontWeight="Bold"/>
                         <PasswordBox x:Name="TxtPrivateKeyPassword" Padding="5" Margin="0,0,0,25"/>
-
-                        <Button x:Name="BtnExecuteDecrypt" Content="THỰC HIỆN GIẢI MÃ" Background="#E67E22" Foreground="White" 
-                                FontWeight="Bold" Padding="15" FontSize="16" Click="BtnExecuteDecrypt_Click"/>
+                        <Button x:Name="BtnExecuteDecrypt" Content="THỰC HIỆN GIẢI MÃ TÀI LIỆU" Background="#E67E22" Foreground="White" FontWeight="Bold" Padding="12" FontSize="14" Click="BtnExecuteDecrypt_Click"/>
                     </StackPanel>
                 </Grid>
             </TabItem>
 
+            <!-- TAB 4: KÝ SỐ TÀI LIỆU (MỚI) -->
+            <TabItem Header="Ký Số Tài Liệu" FontSize="13" Padding="12,6">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <Grid Margin="20">
+                        <StackPanel>
+                            <!-- Bước 1: Chọn file -->
+                            <TextBlock Text="1. Chọn tài liệu cần ký số:" Margin="0,0,0,5" FontWeight="Bold"/>
+                            <Grid Margin="0,0,0,12">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="100"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBox x:Name="TxtSignInput" Grid.Column="0" Padding="5" IsReadOnly="True" />
+                                <Button x:Name="BtnBrowseSignInput" Content="Chọn File" Grid.Column="1" Margin="5,0,0,0" Click="BtnBrowseSignInput_Click"/>
+                            </Grid>
+
+                            <!-- Bước 2: Chọn loại chuẩn ký -->
+                            <TextBlock Text="2. Chọn tiêu chuẩn ký số phù hợp:" Margin="0,0,0,5" FontWeight="Bold"/>
+                            <ComboBox x:Name="ComboSignType" Padding="5" Margin="0,0,0,12" SelectionChanged="ComboSignType_SelectionChanged">
+                                <ComboBoxItem Content="CAdES / CMS (Dành cho file thô bất kỳ)" IsSelected="True"/>
+                                <ComboBoxItem Content="PAdES (Chuyên dụng cho file tài liệu .pdf)"/>
+                                <ComboBoxItem Content="XAdES (Chuyên dụng cho file cấu trúc .xml)"/>
+                            </ComboBox>
+
+                            <!-- Khung cấu hình ký trực quan PDF (Chỉ hiện khi chọn PAdES) -->
+                            <GroupBox x:Name="GroupPdfSettings" Header="Cấu hình hiển thị chữ ký trực quan (PAdES PDF)" Margin="0,0,0,12" Padding="10" Visibility="Collapsed">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0" Margin="5,0">
+                                        <TextBlock Text="Trang ký:" FontSize="11"/>
+                                        <TextBox x:Name="TxtPdfPage" Text="1" Padding="2"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="1" Margin="5,0">
+                                        <TextBlock Text="Tọa độ X:" FontSize="11"/>
+                                        <TextBox x:Name="TxtPdfX" Text="100" Padding="2"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="2" Margin="5,0">
+                                        <TextBlock Text="Tọa độ Y:" FontSize="11"/>
+                                        <TextBox x:Name="TxtPdfY" Text="100" Padding="2"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="3" Margin="5,0">
+                                        <TextBlock Text="Chiều rộng/cao:" FontSize="11"/>
+                                        <TextBox x:Name="TxtPdfSize" Text="150x50" Padding="2" IsReadOnly="True" Background="#F0F0F0"/>
+                                    </StackPanel>
+                                </Grid>
+                            </GroupBox>
+
+                            <!-- Bước 3: Chứng thư người ký -->
+                            <TextBlock Text="3. Chọn chứng thư số của người ký (File .pfx + mật khẩu):" Margin="0,0,0,5" FontWeight="Bold"/>
+                            <Grid Margin="0,0,0,8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="100"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBox x:Name="TxtSignerKeyPath" Grid.Column="0" Padding="5" IsReadOnly="True" />
+                                <Button x:Name="BtnBrowseSignerKey" Content="Chọn Khóa" Grid.Column="1" Margin="5,0,0,0" Click="BtnBrowseSignerKey_Click"/>
+                            </Grid>
+                            <Grid Margin="0,0,0,15">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="120"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Mật khẩu khóa:" VerticalAlignment="Center" FontSize="12"/>
+                                <PasswordBox x:Name="TxtSignerPassword" Grid.Column="1" Padding="5"/>
+                            </Grid>
+
+                            <!-- Bước 4: Tích hợp TSA Timestamp -->
+                            <GroupBox Header="Dịch vụ đóng dấu thời gian (Timestamping Authority - TSA)" Margin="0,0,0,20" Padding="10">
+                                <StackPanel>
+                                    <CheckBox x:Name="ChkUseTsa" Content="Tích hợp Nhãn thời gian chống chối bỏ (TSA Timestamp)" IsChecked="True" Margin="0,0,5,5" FontWeight="Bold"/>
+                                    <Grid Margin="0,5,0,0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="80"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="TSA Server:" VerticalAlignment="Center" FontSize="11"/>
+                                        <TextBox x:Name="TxtTsaUrl" Grid.Column="1" Text="http://timestamp.digicert.com" Padding="4"/>
+                                    </Grid>
+                                </StackPanel>
+                            </GroupBox>
+
+                            <Button x:Name="BtnExecuteSign" Content="THỰC HIỆN KÝ SỐ TÀI LIỆU" Background="#8E44AD" Foreground="White" FontWeight="Bold" Padding="12" FontSize="14" Click="BtnExecuteSign_Click"/>
+                        </StackPanel>
+                    </Grid>
+                </ScrollViewer>
+            </TabItem>
+
+            <!-- TAB 5: XÁC THỰC CHỮ KÝ (MỚI) -->
+            <TabItem Header="Xác Thực Chữ Ký" FontSize="13" Padding="12,6">
+                <Grid Margin="20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0">
+                        <TextBlock Text="Chọn tài liệu cần kiểm tra tính hợp lệ của chữ ký:" Margin="0,0,0,5" FontWeight="Bold"/>
+                        <Grid Margin="0,0,0,15">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="100"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox x:Name="TxtVerifyInput" Grid.Column="0" Padding="5" IsReadOnly="True" />
+                            <Button x:Name="BtnBrowseVerifyInput" Content="Chọn File" Grid.Column="1" Margin="5,0,0,0" Click="BtnBrowseVerifyInput_Click"/>
+                        </Grid>
+                        <Button x:Name="BtnExecuteVerify" Content="KIỂM TRA CHỨNG THỰC CHỮ KÝ" Background="#2980B9" Foreground="White" FontWeight="Bold" Padding="12" FontSize="14" Click="BtnExecuteVerify_Click" Margin="0,0,0,15"/>
+                    </StackPanel>
+
+                    <!-- Khung kết quả hiển thị chi tiết (Đáp ứng yêu cầu phân tích tính toàn vẹn và chuỗi chứng chỉ) -->
+                    <GroupBox Grid.Row="1" Header="Kết quả phân tích &amp; Thẩm định bảo mật" Padding="10">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <!-- Tính toàn vẹn dữ liệu -->
+                            <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,8">
+                                <TextBlock Text="Tính toàn vẹn (Integrity): " Width="180" FontWeight="Bold"/>
+                                <TextBlock x:Name="TxtResultIntegrity" Text="Chưa kiểm tra" Foreground="Gray" FontWeight="Bold"/>
+                            </StackPanel>
+
+                            <!-- Thời gian đóng dấu -->
+                            <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,8">
+                                <TextBlock Text="Nhãn thời gian lịch sử (TSA): " Width="180" FontWeight="Bold"/>
+                                <TextBlock x:Name="TxtResultTimestamp" Text="Chưa kiểm tra" Foreground="Gray"/>
+                            </StackPanel>
+
+                            <!-- Trạng thái xích chứng chỉ -->
+                            <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,0,0,8">
+                                <TextBlock Text="Chuỗi chứng chỉ (Chain Status): " Width="180" FontWeight="Bold"/>
+                                <TextBlock x:Name="TxtResultChain" Text="Chưa kiểm tra" Foreground="Gray" FontWeight="Bold"/>
+                            </StackPanel>
+
+                            <!-- Nhật ký log kỹ thuật sâu -->
+                            <TextBox x:Name="TxtVerifyDetails" Grid.Row="3" Margin="0,5,0,0" IsReadOnly="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Background="#F8F9FA" FontFamily="Consolas" FontSize="11" Text="Nhật ký thẩm định hệ thống chữ ký sẽ xuất hiện tại đây..."/>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+
             <!-- TAB 3: KHO CHỨNG THƯ HỆ THỐNG -->
-            <TabItem Header="Kho Chứng Thư Hệ Thống" FontSize="14" Padding="10,5">
+            <TabItem Header="Kho Chứng Thư" FontSize="13" Padding="12,6">
                 <Grid Margin="15">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
@@ -122,10 +253,10 @@
             </TabItem>
         </TabControl>
 
-        <!-- Thanh trạng thái (Status Bar / Log) -->
+        <!-- Thanh trạng thái -->
         <StatusBar Grid.Row="2" Background="#BDC3C7">
             <StatusBarItem>
-                <TextBlock x:Name="TxtStatus" Text="Trạng thái: Sẵn sàng." FontWeight="Bold" Foreground="#2C3E50"/>
+                <TextBlock x:Name="TxtStatus" Text="Trạng thái: Sẵn sàng." FontWeight="Bold" Foreground="#2C3E50" FontSize="11"/>
             </StatusBarItem>
         </StatusBar>
     </Grid>

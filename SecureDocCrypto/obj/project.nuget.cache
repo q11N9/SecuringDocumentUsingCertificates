@@ -1,13 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "LWv7BwgjlJw=",
+  "dgSpecHash": "262x9t4pDog=",
   "success": true,
   "projectFilePath": "C:\\Users\\maima\\Downloads\\Năm 4\\Chứng thực điện tử\\BTL\\SecureDocCrypto\\SecureDocCrypto.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\maima\\.nuget\\packages\\bouncycastle.cryptography\\2.6.2\\bouncycastle.cryptography.2.6.2.nupkg.sha512",
     "C:\\Users\\maima\\.nuget\\packages\\microsoft.bcl.cryptography\\10.0.8\\microsoft.bcl.cryptography.10.0.8.nupkg.sha512",
     "C:\\Users\\maima\\.nuget\\packages\\system.formats.asn1\\10.0.8\\system.formats.asn1.10.0.8.nupkg.sha512",
-    "C:\\Users\\maima\\.nuget\\packages\\system.security.cryptography.pkcs\\10.0.8\\system.security.cryptography.pkcs.10.0.8.nupkg.sha512"
+    "C:\\Users\\maima\\.nuget\\packages\\system.security.cryptography.pkcs\\10.0.8\\system.security.cryptography.pkcs.10.0.8.nupkg.sha512",
+    "C:\\Users\\maima\\.nuget\\packages\\system.security.cryptography.xml\\10.0.8\\system.security.cryptography.xml.10.0.8.nupkg.sha512"
   ],
   "logs": []
 }

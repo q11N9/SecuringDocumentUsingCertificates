@@ -25,3 +25,5 @@ C:\Users\maima\Downloads\Năm 4\Chứng thực điện tử\BTL\SecureDocCrypto\
 C:\Users\maima\Downloads\Năm 4\Chứng thực điện tử\BTL\SecureDocCrypto\obj\Debug\net8.0-windows\SecureDocCrypto.pdb
 C:\Users\maima\Downloads\Năm 4\Chứng thực điện tử\BTL\SecureDocCrypto\obj\Debug\net8.0-windows\SecureDocCrypto.genruntimeconfig.cache
 C:\Users\maima\Downloads\Năm 4\Chứng thực điện tử\BTL\SecureDocCrypto\obj\Debug\net8.0-windows\ref\SecureDocCrypto.dll
+C:\Users\maima\Downloads\Năm 4\Chứng thực điện tử\BTL\SecureDocCrypto\obj\Debug\net8.0-windows\SecureDocCrypto.sourcelink.json
+C:\Users\maima\Downloads\Năm 4\Chứng thực điện tử\BTL\SecureDocCrypto\bin\Debug\net8.0-windows\System.Security.Cryptography.Xml.dll

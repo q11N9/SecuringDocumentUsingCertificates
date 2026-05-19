@@ -7,6 +7,7 @@ C:\Users\maima\Downloads\Năm 4\Chứng thực điện tử\BTL\SecureDocCrypto\
 C:\Users\maima\Downloads\Năm 4\Chứng thực điện tử\BTL\SecureDocCrypto\bin\Release\net8.0-windows\Microsoft.Bcl.Cryptography.dll
 C:\Users\maima\Downloads\Năm 4\Chứng thực điện tử\BTL\SecureDocCrypto\bin\Release\net8.0-windows\System.Formats.Asn1.dll
 C:\Users\maima\Downloads\Năm 4\Chứng thực điện tử\BTL\SecureDocCrypto\bin\Release\net8.0-windows\System.Security.Cryptography.Pkcs.dll
+C:\Users\maima\Downloads\Năm 4\Chứng thực điện tử\BTL\SecureDocCrypto\bin\Release\net8.0-windows\System.Security.Cryptography.Xml.dll
 C:\Users\maima\Downloads\Năm 4\Chứng thực điện tử\BTL\SecureDocCrypto\bin\Release\net8.0-windows\runtimes\win\lib\net8.0\System.Security.Cryptography.Pkcs.dll
 C:\Users\maima\Downloads\Năm 4\Chứng thực điện tử\BTL\SecureDocCrypto\obj\Release\net8.0-windows\SecureDocCrypto.csproj.AssemblyReference.cache
 C:\Users\maima\Downloads\Năm 4\Chứng thực điện tử\BTL\SecureDocCrypto\obj\Release\net8.0-windows\UI\MainWindow.g.cs
@@ -19,6 +20,7 @@ C:\Users\maima\Downloads\Năm 4\Chứng thực điện tử\BTL\SecureDocCrypto\
 C:\Users\maima\Downloads\Năm 4\Chứng thực điện tử\BTL\SecureDocCrypto\obj\Release\net8.0-windows\SecureDocCrypto.AssemblyInfoInputs.cache
 C:\Users\maima\Downloads\Năm 4\Chứng thực điện tử\BTL\SecureDocCrypto\obj\Release\net8.0-windows\SecureDocCrypto.AssemblyInfo.cs
 C:\Users\maima\Downloads\Năm 4\Chứng thực điện tử\BTL\SecureDocCrypto\obj\Release\net8.0-windows\SecureDocCrypto.csproj.CoreCompileInputs.cache
+C:\Users\maima\Downloads\Năm 4\Chứng thực điện tử\BTL\SecureDocCrypto\obj\Release\net8.0-windows\SecureDocCrypto.sourcelink.json
 C:\Users\maima\Downloads\Năm 4\Chứng thực điện tử\BTL\SecureDocCrypto\obj\Release\net8.0-windows\SecureDo.69D3170F.Up2Date
 C:\Users\maima\Downloads\Năm 4\Chứng thực điện tử\BTL\SecureDocCrypto\obj\Release\net8.0-windows\SecureDocCrypto.dll
 C:\Users\maima\Downloads\Năm 4\Chứng thực điện tử\BTL\SecureDocCrypto\obj\Release\net8.0-windows\refint\SecureDocCrypto.dll

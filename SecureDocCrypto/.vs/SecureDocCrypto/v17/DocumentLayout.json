@@ -3,24 +3,28 @@
   "WorkspaceRootPath": "C:\\Users\\maima\\Downloads\\N\u0103m 4\\Ch\u1EE9ng th\u1EF1c \u0111i\u1EC7n t\u1EED\\BTL\\SecureDocCrypto\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{EEE9E18D-4508-4064-8ED8-7B88226E3024}|SecureDocCrypto.csproj|c:\\users\\maima\\downloads\\n\u0103m 4\\ch\u1EE9ng th\u1EF1c \u0111i\u1EC7n t\u1EED\\btl\\securedoccrypto\\ui\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EEE9E18D-4508-4064-8ED8-7B88226E3024}|SecureDocCrypto.csproj|solutionrelative:ui\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EEE9E18D-4508-4064-8ED8-7B88226E3024}|SecureDocCrypto.csproj|c:\\users\\maima\\downloads\\n\u0103m 4\\ch\u1EE9ng th\u1EF1c \u0111i\u1EC7n t\u1EED\\btl\\securedoccrypto\\ui\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{EEE9E18D-4508-4064-8ED8-7B88226E3024}|SecureDocCrypto.csproj|solutionrelative:ui\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EEE9E18D-4508-4064-8ED8-7B88226E3024}|SecureDocCrypto.csproj|c:\\users\\maima\\downloads\\n\u0103m 4\\ch\u1EE9ng th\u1EF1c \u0111i\u1EC7n t\u1EED\\btl\\securedoccrypto\\core\\cryptoengine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EEE9E18D-4508-4064-8ED8-7B88226E3024}|SecureDocCrypto.csproj|solutionrelative:core\\cryptoengine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EEE9E18D-4508-4064-8ED8-7B88226E3024}|SecureDocCrypto.csproj|c:\\users\\maima\\downloads\\n\u0103m 4\\ch\u1EE9ng th\u1EF1c \u0111i\u1EC7n t\u1EED\\btl\\securedoccrypto\\core\\digitalsignatureengine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EEE9E18D-4508-4064-8ED8-7B88226E3024}|SecureDocCrypto.csproj|solutionrelative:core\\digitalsignatureengine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EEE9E18D-4508-4064-8ED8-7B88226E3024}|SecureDocCrypto.csproj|c:\\users\\maima\\downloads\\n\u0103m 4\\ch\u1EE9ng th\u1EF1c \u0111i\u1EC7n t\u1EED\\btl\\securedoccrypto\\ui\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EEE9E18D-4508-4064-8ED8-7B88226E3024}|SecureDocCrypto.csproj|solutionrelative:ui\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{EEE9E18D-4508-4064-8ED8-7B88226E3024}|SecureDocCrypto.csproj|c:\\users\\maima\\downloads\\n\u0103m 4\\ch\u1EE9ng th\u1EF1c \u0111i\u1EC7n t\u1EED\\btl\\securedoccrypto\\core\\certprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EEE9E18D-4508-4064-8ED8-7B88226E3024}|SecureDocCrypto.csproj|solutionrelative:core\\certprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EEE9E18D-4508-4064-8ED8-7B88226E3024}|SecureDocCrypto.csproj|c:\\users\\maima\\downloads\\n\u0103m 4\\ch\u1EE9ng th\u1EF1c \u0111i\u1EC7n t\u1EED\\btl\\securedoccrypto\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{EEE9E18D-4508-4064-8ED8-7B88226E3024}|SecureDocCrypto.csproj|solutionrelative:app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{EEE9E18D-4508-4064-8ED8-7B88226E3024}|SecureDocCrypto.csproj|c:\\users\\maima\\downloads\\n\u0103m 4\\ch\u1EE9ng th\u1EF1c \u0111i\u1EC7n t\u1EED\\btl\\securedoccrypto\\core\\cryptoengine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EEE9E18D-4508-4064-8ED8-7B88226E3024}|SecureDocCrypto.csproj|solutionrelative:core\\cryptoengine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EEE9E18D-4508-4064-8ED8-7B88226E3024}|SecureDocCrypto.csproj|c:\\users\\maima\\downloads\\n\u0103m 4\\ch\u1EE9ng th\u1EF1c \u0111i\u1EC7n t\u1EED\\btl\\securedoccrypto\\ui\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{EEE9E18D-4508-4064-8ED8-7B88226E3024}|SecureDocCrypto.csproj|solutionrelative:ui\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{EEE9E18D-4508-4064-8ED8-7B88226E3024}|SecureDocCrypto.csproj|c:\\users\\maima\\downloads\\n\u0103m 4\\ch\u1EE9ng th\u1EF1c \u0111i\u1EC7n t\u1EED\\btl\\securedoccrypto\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{EEE9E18D-4508-4064-8ED8-7B88226E3024}|SecureDocCrypto.csproj|solutionrelative:app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{EEE9E18D-4508-4064-8ED8-7B88226E3024}|SecureDocCrypto.csproj|c:\\users\\maima\\downloads\\n\u0103m 4\\ch\u1EE9ng th\u1EF1c \u0111i\u1EC7n t\u1EED\\btl\\securedoccrypto\\assemblyinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -34,11 +38,15 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 1,
           "Children": [
             {
+              "$type": "Bookmark",
+              "Name": "ST:2:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
               "Title": "MainWindow.xaml",
               "DocumentMoniker": "C:\\Users\\maima\\Downloads\\N\u0103m 4\\Ch\u1EE9ng th\u1EF1c \u0111i\u1EC7n t\u1EED\\BTL\\SecureDocCrypto\\UI\\MainWindow.xaml",
               "RelativeDocumentMoniker": "UI\\MainWindow.xaml",
@@ -50,7 +58,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 1,
+              "Title": "DigitalSignatureEngine.cs",
+              "DocumentMoniker": "C:\\Users\\maima\\Downloads\\N\u0103m 4\\Ch\u1EE9ng th\u1EF1c \u0111i\u1EC7n t\u1EED\\BTL\\SecureDocCrypto\\Core\\DigitalSignatureEngine.cs",
+              "RelativeDocumentMoniker": "Core\\DigitalSignatureEngine.cs",
+              "ToolTip": "C:\\Users\\maima\\Downloads\\N\u0103m 4\\Ch\u1EE9ng th\u1EF1c \u0111i\u1EC7n t\u1EED\\BTL\\SecureDocCrypto\\Core\\DigitalSignatureEngine.cs",
+              "RelativeToolTip": "Core\\DigitalSignatureEngine.cs",
+              "ViewState": "AgIAAOQAAAAAAAAAAAAcwPQAAABIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-19T01:36:18.018Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "AssemblyInfo.cs",
               "DocumentMoniker": "C:\\Users\\maima\\Downloads\\N\u0103m 4\\Ch\u1EE9ng th\u1EF1c \u0111i\u1EC7n t\u1EED\\BTL\\SecureDocCrypto\\AssemblyInfo.cs",
               "RelativeDocumentMoniker": "AssemblyInfo.cs",
@@ -58,12 +79,11 @@
               "RelativeToolTip": "AssemblyInfo.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-16T11:54:19.58Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-16T11:54:19.58Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "App.xaml",
               "DocumentMoniker": "C:\\Users\\maima\\Downloads\\N\u0103m 4\\Ch\u1EE9ng th\u1EF1c \u0111i\u1EC7n t\u1EED\\BTL\\SecureDocCrypto\\App.xaml",
               "RelativeDocumentMoniker": "App.xaml",
@@ -75,7 +95,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "CryptoEngine.cs",
               "DocumentMoniker": "C:\\Users\\maima\\Downloads\\N\u0103m 4\\Ch\u1EE9ng th\u1EF1c \u0111i\u1EC7n t\u1EED\\BTL\\SecureDocCrypto\\Core\\CryptoEngine.cs",
               "RelativeDocumentMoniker": "Core\\CryptoEngine.cs",
@@ -83,38 +103,31 @@
               "RelativeToolTip": "Core\\CryptoEngine.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACMAAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-16T10:34:15.719Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-16T10:34:15.719Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "CertProvider.cs",
               "DocumentMoniker": "C:\\Users\\maima\\Downloads\\N\u0103m 4\\Ch\u1EE9ng th\u1EF1c \u0111i\u1EC7n t\u1EED\\BTL\\SecureDocCrypto\\Core\\CertProvider.cs",
               "RelativeDocumentMoniker": "Core\\CertProvider.cs",
               "ToolTip": "C:\\Users\\maima\\Downloads\\N\u0103m 4\\Ch\u1EE9ng th\u1EF1c \u0111i\u1EC7n t\u1EED\\BTL\\SecureDocCrypto\\Core\\CertProvider.cs",
               "RelativeToolTip": "Core\\CertProvider.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAWAAAAAAAAAA==",
+              "ViewState": "AgIAAEgAAAAAAAAAAAAYwA8AAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-16T10:34:02.714Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-16T10:34:02.714Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "MainWindow.xaml.cs",
               "DocumentMoniker": "C:\\Users\\maima\\Downloads\\N\u0103m 4\\Ch\u1EE9ng th\u1EF1c \u0111i\u1EC7n t\u1EED\\BTL\\SecureDocCrypto\\UI\\MainWindow.xaml.cs",
               "RelativeDocumentMoniker": "UI\\MainWindow.xaml.cs",
               "ToolTip": "C:\\Users\\maima\\Downloads\\N\u0103m 4\\Ch\u1EE9ng th\u1EF1c \u0111i\u1EC7n t\u1EED\\BTL\\SecureDocCrypto\\UI\\MainWindow.xaml.cs",
               "RelativeToolTip": "UI\\MainWindow.xaml.cs",
-              "ViewState": "AgIAABIAAAAAAAAAAAAYwDIAAABLAAAAAAAAAA==",
+              "ViewState": "AgIAACQBAAAAAAAAAAA2wCwBAABRAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-16T10:14:39.764Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:2:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+              "WhenOpened": "2026-05-16T10:14:39.764Z"
             }
           ]
         }

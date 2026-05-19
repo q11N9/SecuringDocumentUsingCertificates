@@ -1,7 +1,13 @@
-﻿using System;
-using System.Windows;
+﻿#nullable disable
 using Microsoft.Win32;
-using SecureDocCrypto.Core; // Khai báo để gọi các hàm mã hóa từ tầng Core
+using SecureDocCrypto.Core;
+using System;
+using System.IO;
+using System.Security.Cryptography.X509Certificates;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media;
 
 namespace SecureDocCrypto.UI
 {
@@ -10,179 +16,303 @@ namespace SecureDocCrypto.UI
         public MainWindow()
         {
             InitializeComponent();
-            LoadWindowsCertificates(); // Tự động quét kho chứng thư khi mở ứng dụng
+            RefreshCertificateStore();
         }
 
-        #region XỬ LÝ SỰ KIỆN TAB MÃ HÓA
+        private void Header_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ButtonState == MouseButtonState.Pressed)
+                DragMove();
+        }
+
+        private void BtnMinimize_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
+
+        private void BtnMaximize_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState == WindowState.Maximized
+                ? WindowState.Normal
+                : WindowState.Maximized;
+        }
+
+        private void BtnClose_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
 
         private void BtnBrowseEncryptInput_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog dlg = new OpenFileDialog();
-            dlg.Title = "Chọn tài liệu cần mã hóa";
-            if (dlg.ShowDialog() == true)
-            {
-                TxtEncryptInput.Text = dlg.FileName;
-            }
+            TxtEncryptInput.Text = PickOpenFile("Chọn tài liệu cần mã hóa|*.*");
         }
 
         private void BtnBrowsePublicKey_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog dlg = new OpenFileDialog();
-            dlg.Filter = "Chứng thư số (*.cer;*.crt)|*.cer;*.crt|Tất cả các file (*.*)|*.*";
-            if (dlg.ShowDialog() == true)
-            {
-                TxtPublicKeyPath.Text = dlg.FileName;
-            }
+            TxtPublicKeyPath.Text = PickOpenFile("Certificate Public Key (*.cer;*.crt;*.der)|*.cer;*.crt;*.der|All files (*.*)|*.*");
         }
-
-        private void BtnExecuteEncrypt_Click(object sender, RoutedEventArgs e)
-        {
-            if (string.IsNullOrEmpty(TxtEncryptInput.Text) || string.IsNullOrEmpty(TxtPublicKeyPath.Text))
-            {
-                MessageBox.Show("Vui lòng chọn đầy đủ File dữ liệu và Chứng thư số người nhận!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-
-            try
-            {
-                TxtStatus.Text = "Trạng thái: Đang tiến hành mã hóa...";
-
-                // 1. Nạp public key
-                var publicKey = CertProvider.LoadPublicKey(TxtPublicKeyPath.Text);
-
-                // 2. Định nghĩa file đầu ra (.p7m)
-                string outputPath = TxtEncryptInput.Text + ".p7m";
-
-                // 3. Gọi lõi mã hóa thực thi
-                CryptoEngine.EncryptFile(TxtEncryptInput.Text, outputPath, publicKey);
-
-                TxtStatus.Text = $"Trạng thái: Mã hóa thành công! File lưu tại: {outputPath}";
-                MessageBox.Show($"Mã hóa tài liệu thành công!\nFile đầu ra: {outputPath}", "Thành công", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-            catch (Exception ex)
-            {
-                TxtStatus.Text = "Trạng thái: Mã hóa thất bại.";
-                MessageBox.Show(ex.Message, "Lỗi Hệ Thống", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-
-        #endregion
-
-        #region XỬ LÝ SỰ KIỆN TAB GIẢI MÃ
 
         private void BtnBrowseDecryptInput_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog dlg = new OpenFileDialog();
-            dlg.Filter = "File đã mã hóa (*.p7m)|*.p7m";
-            if (dlg.ShowDialog() == true)
-            {
-                TxtDecryptInput.Text = dlg.FileName;
-            }
+            TxtDecryptInput.Text = PickOpenFile("PKCS#7/CMS encrypted file (*.p7m;*.p7b)|*.p7m;*.p7b|All files (*.*)|*.*");
         }
 
         private void BtnBrowsePrivateKey_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog dlg = new OpenFileDialog();
-            dlg.Filter = "Chứng thư cá nhân (*.pfx;*.p12)|*.pfx;*.p12";
-            if (dlg.ShowDialog() == true)
+            TxtPrivateKeyPath.Text = PickOpenFile("Private certificate (*.pfx;*.p12)|*.pfx;*.p12|All files (*.*)|*.*");
+        }
+
+        private void BtnBrowseSignInput_Click(object sender, RoutedEventArgs e)
+        {
+            TxtSignInput.Text = PickOpenFile("Chọn tài liệu cần ký|*.*");
+        }
+
+        private void BtnBrowseSignerKey_Click(object sender, RoutedEventArgs e)
+        {
+            TxtSignerKeyPath.Text = PickOpenFile("Private certificate (*.pfx;*.p12)|*.pfx;*.p12|All files (*.*)|*.*");
+        }
+
+        private void BtnBrowseVerifyInput_Click(object sender, RoutedEventArgs e)
+        {
+            TxtVerifyInput.Text = PickOpenFile("Signed CMS file (*.p7m;*.p7s;*.p7b)|*.p7m;*.p7s;*.p7b|All files (*.*)|*.*");
+        }
+
+        private void BtnExecuteEncrypt_Click(object sender, RoutedEventArgs e)
+        {
+            try
             {
-                TxtPrivateKeyPath.Text = dlg.FileName;
+                EnsureFileSelected(TxtEncryptInput.Text, "Vui lòng chọn tài liệu cần mã hóa.");
+                EnsureFileSelected(TxtPublicKeyPath.Text, "Vui lòng chọn chứng thư Public Key.");
+
+                string outputPath = PickSaveFile(
+                    "Lưu file đã mã hóa",
+                    "Encrypted CMS (*.p7m)|*.p7m|All files (*.*)|*.*",
+                    Path.GetFileName(TxtEncryptInput.Text) + ".p7m");
+
+                if (string.IsNullOrWhiteSpace(outputPath))
+                    return;
+
+                X509Certificate2 cert = CertProvider.LoadPublicKey(TxtPublicKeyPath.Text);
+                CryptoEngine.EncryptFile(TxtEncryptInput.Text, outputPath, cert);
+
+                SetStatus($"Mã hóa thành công: {outputPath}");
+                MessageBox.Show("Mã hóa tài liệu thành công.", "Thành công", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                ShowError(ex);
             }
         }
 
         private void BtnExecuteDecrypt_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(TxtDecryptInput.Text) || string.IsNullOrEmpty(TxtPrivateKeyPath.Text))
-            {
-                MessageBox.Show("Vui lòng chọn file mã hóa và file khóa cá nhân tương ứng!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-
             try
             {
-                TxtStatus.Text = "Trạng thái: Đang thực hiện giải mã...";
+                EnsureFileSelected(TxtDecryptInput.Text, "Vui lòng chọn file đã mã hóa.");
+                EnsureFileSelected(TxtPrivateKeyPath.Text, "Vui lòng chọn chứng thư Private Key.");
 
-                // 1. Nạp Private Key kèm mật khẩu
-                var privateKey = CertProvider.LoadPrivateKey(TxtPrivateKeyPath.Text, TxtPrivateKeyPassword.Password);
+                string outputPath = PickSaveFile(
+                    "Lưu file đã giải mã",
+                    "All files (*.*)|*.*",
+                    RemoveKnownExtension(Path.GetFileName(TxtDecryptInput.Text), ".p7m"));
 
-                // 2. Tạo đường dẫn đầu ra
-                string outputPath = TxtDecryptInput.Text.Replace(".p7m", "");
-                if (outputPath == TxtDecryptInput.Text) outputPath += ".decrypted";
+                if (string.IsNullOrWhiteSpace(outputPath))
+                    return;
 
-                // 3. Gọi lõi giải mã thực thi
-                CryptoEngine.DecryptFile(TxtDecryptInput.Text, outputPath, privateKey);
+                X509Certificate2 cert = CertProvider.LoadPrivateKey(TxtPrivateKeyPath.Text, TxtPrivateKeyPassword.Password);
+                CryptoEngine.DecryptFile(TxtDecryptInput.Text, outputPath, cert);
 
-                TxtStatus.Text = $"Trạng thái: Giải mã thành công! Đã khôi phục file.";
-                MessageBox.Show($"Giải mã thành công! Tài liệu đã được khôi phục tại:\n{outputPath}", "Thành công", MessageBoxButton.OK, MessageBoxImage.Information);
+                SetStatus($"Giải mã thành công: {outputPath}");
+                MessageBox.Show("Giải mã tài liệu thành công.", "Thành công", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {
-                TxtStatus.Text = "Trạng thái: Giải mã thất bại.";
-                MessageBox.Show(ex.Message, "Lỗi Hệ Thống", MessageBoxButton.OK, MessageBoxImage.Error);
+                ShowError(ex);
             }
         }
 
-        #endregion
-
-        #region CHỨC NĂNG QUẢN LÝ KHO KEY WINDOWS
-
-        private void LoadWindowsCertificates()
+        private void BtnExecuteSign_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                var certs = CertProvider.GetCertificatesFromWindowsStore();
-                GridWindowsCerts.ItemsSource = certs;
+                EnsureFileSelected(TxtSignInput.Text, "Vui lòng chọn tài liệu cần ký.");
+                EnsureFileSelected(TxtSignerKeyPath.Text, "Vui lòng chọn chứng thư ký số Private Key.");
+
+                X509Certificate2 signerCert = CertProvider.LoadPrivateKey(TxtSignerKeyPath.Text, TxtSignerPassword.Password);
+
+                int selectedIndex = ComboSignType.SelectedIndex;
+
+                if (selectedIndex == 0)
+                {
+                    string outputPath = PickSaveFile(
+                        "Lưu file chữ ký CAdES/CMS",
+                        "Signed CMS (*.p7m)|*.p7m|All files (*.*)|*.*",
+                        Path.GetFileName(TxtSignInput.Text) + ".signed.p7m");
+
+                    if (string.IsNullOrWhiteSpace(outputPath))
+                        return;
+
+                    bool useTsa = ChkUseTsa.IsChecked == true;
+                    byte[] signedData = DigitalSignatureEngine.SignCAdES(
+                        TxtSignInput.Text,
+                        signerCert,
+                        useTsa,
+                        TxtTsaUrl.Text);
+
+                    File.WriteAllBytes(outputPath, signedData);
+
+                    SetStatus($"Ký CAdES/CMS thành công: {outputPath}");
+                    MessageBox.Show("Ký số CAdES/CMS thành công.", "Thành công", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else if (selectedIndex == 1)
+                {
+                    string outputPath = PickSaveFile(
+                        "Lưu file PDF đã ký mô phỏng",
+                        "PDF file (*.pdf)|*.pdf|All files (*.*)|*.*",
+                        Path.GetFileNameWithoutExtension(TxtSignInput.Text) + ".signed.pdf");
+
+                    if (string.IsNullOrWhiteSpace(outputPath))
+                        return;
+
+                    string location = $"Page={TxtPdfPage.Text}, X={TxtPdfX.Text}, Y={TxtPdfY.Text}, Size={TxtPdfSize.Text}";
+                    string result = DigitalSignatureEngine.SignPAdESMock(TxtSignInput.Text, outputPath, signerCert, location);
+
+                    SetStatus(result);
+                    MessageBox.Show(result, "PAdES Mock", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else
+                {
+                    string outputPath = PickSaveFile(
+                        "Lưu file XML đã ký",
+                        "XML file (*.xml)|*.xml|All files (*.*)|*.*",
+                        Path.GetFileNameWithoutExtension(TxtSignInput.Text) + ".signed.xml");
+
+                    if (string.IsNullOrWhiteSpace(outputPath))
+                        return;
+
+                    DigitalSignatureEngine.SignXAdES(TxtSignInput.Text, outputPath, signerCert);
+
+                    SetStatus($"Ký XAdES/XML thành công: {outputPath}");
+                    MessageBox.Show("Ký số XML thành công.", "Thành công", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Không thể quét kho khóa hệ thống: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Warning);
+                ShowError(ex);
+            }
+        }
+
+        private void BtnExecuteVerify_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                EnsureFileSelected(TxtVerifyInput.Text, "Vui lòng chọn file chữ ký cần xác thực.");
+
+                string tsTime;
+                bool isIntegrityOk;
+                bool isChainOk;
+
+                string details = DigitalSignatureEngine.VerifySignature(
+                    TxtVerifyInput.Text,
+                    out isIntegrityOk,
+                    out isChainOk,
+                    out tsTime);
+
+                TxtResultIntegrity.Text = isIntegrityOk ? "HỢP LỆ" : "KHÔNG HỢP LỆ";
+                TxtResultIntegrity.Foreground = isIntegrityOk ? Brushes.Green : Brushes.Red;
+
+                TxtResultChain.Text = isChainOk ? "TIN CẬY" : "KHÔNG TIN CẬY";
+                TxtResultChain.Foreground = isChainOk ? Brushes.Green : Brushes.Red;
+
+                TxtResultTimestamp.Text = tsTime;
+                TxtResultTimestamp.Foreground = tsTime.StartsWith("Có") ? Brushes.Green : Brushes.Gray;
+
+                TxtVerifyDetails.Text = details;
+
+                SetStatus("Đã kiểm tra chữ ký.");
+            }
+            catch (Exception ex)
+            {
+                ShowError(ex);
             }
         }
 
         private void BtnRefreshStore_Click(object sender, RoutedEventArgs e)
         {
-            LoadWindowsCertificates();
-            MessageBox.Show("Đã làm mới danh sách chứng thư số từ Windows Certificate Store!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+            RefreshCertificateStore();
         }
 
-        #endregion
-
-        #region ĐIỀU KHIỂN CỬA SỔ (WINDOW CONTROLS)
-
-        // Hàm giúp người dùng giữ chuột trái vào thanh tiêu đề màu xanh để kéo dịch chuyển cửa sổ app
-        private void Header_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void ComboSignType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (e.ChangedButton == System.Windows.Input.MouseButton.Left)
+            if (GroupPdfSettings == null)
+                return;
+
+            GroupPdfSettings.Visibility = ComboSignType.SelectedIndex == 1
+                ? Visibility.Visible
+                : Visibility.Collapsed;
+        }
+
+        private void RefreshCertificateStore()
+        {
+            try
             {
-                this.DragMove();
+                GridWindowsCerts.ItemsSource = CertProvider.GetCertificatesFromWindowsStore();
+                SetStatus("Đã tải danh sách chứng thư từ Windows Store.");
+            }
+            catch (Exception ex)
+            {
+                ShowError(ex);
             }
         }
 
-        // Xử lý nút Thu nhỏ xuống Taskbar (Minimize)
-        private void BtnMinimize_Click(object sender, RoutedEventArgs e)
+        private static string PickOpenFile(string filter)
         {
-            this.WindowState = WindowState.Minimized;
-        }
-
-        // Xử lý nút Phóng to / Thu nhỏ về kích thước cũ (Maximize/Restore)
-        private void BtnMaximize_Click(object sender, RoutedEventArgs e)
-        {
-            if (this.WindowState == WindowState.Maximized)
+            OpenFileDialog dialog = new OpenFileDialog
             {
-                this.WindowState = WindowState.Normal;
-            }
-            else
-            {
-                this.WindowState = WindowState.Maximized;
-            }
+                Filter = filter,
+                CheckFileExists = true
+            };
+
+            return dialog.ShowDialog() == true ? dialog.FileName : string.Empty;
         }
 
-        // Xử lý nút Đóng ứng dụng hoàn toàn (Close)
-        private void BtnClose_Click(object sender, RoutedEventArgs e)
+        private static string PickSaveFile(string title, string filter, string defaultFileName)
         {
-            this.Close();
+            SaveFileDialog dialog = new SaveFileDialog
+            {
+                Title = title,
+                Filter = filter,
+                FileName = defaultFileName,
+                AddExtension = true,
+                OverwritePrompt = true
+            };
+
+            return dialog.ShowDialog() == true ? dialog.FileName : string.Empty;
         }
 
-        #endregion
+        private static void EnsureFileSelected(string path, string message)
+        {
+            if (string.IsNullOrWhiteSpace(path) || !File.Exists(path))
+                throw new InvalidOperationException(message);
+        }
+
+        private static string RemoveKnownExtension(string fileName, string extension)
+        {
+            if (fileName.EndsWith(extension, StringComparison.OrdinalIgnoreCase))
+                return fileName.Substring(0, fileName.Length - extension.Length);
+
+            return Path.GetFileNameWithoutExtension(fileName) + ".decrypted" + Path.GetExtension(fileName);
+        }
+
+        private void SetStatus(string message)
+        {
+            TxtStatus.Text = "Trạng thái: " + message;
+        }
+
+        private void ShowError(Exception ex)
+        {
+            SetStatus("Lỗi: " + ex.Message);
+            MessageBox.Show(ex.Message, "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
     }
 }
